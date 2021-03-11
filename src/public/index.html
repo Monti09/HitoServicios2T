@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Hito Servicios Monti</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cosmo/bootstrap.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+    integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+  <div class="container p-4">
+    <!-- Formulario de inicio -->
+    <div id="nickWrap">
+      <div class="row" id ="home">
+        <div class="col-md-4 mx-auto">
+          <div class="card text-white bg-primary mb-7">
+            <div class="card-header">
+              <h3>Introduzca su usuario</h3>
+            </div>
+            <p id="nickError"></p>
+            <div class="card-body">
+              <p>Nombre de usuario:</p>
+              <form id="nickForm">
+                <input id="nickname" type="text" class="form-control" autofocus />
+                <button type="submit" class="btn btn-primary btn-block mt-2"><i
+                    class="fas fa-arrow-alt-circle-right"></i></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carta de usuarios-->
+    <div id="user-table">
+      <div class="card">
+        <div id="tituloUsuarios" class="card-header bg-primary text-white">
+          <h3>Usuarios conectados</h3>
+        </div>
+        <div id="bgusers" class="card-body scroll" style="max-height: 150px; overflow-y: auto;">
+          <div id="usernames"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat -->
+    <div id="contentWrap">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div id="tituloChat"class="card-header bg-primary text-white">
+              <div class="row">
+                <div class="col-md-9">
+                  <h4>Chat</h4>
+                </div>
+                <div class="col-md-1">
+                  <a id="usuarios" class="btn btn-primary" onclick="mostrarUsuarios()"><i class="fas fa-users"></i></a>
+                </div>
+                <div class="col-md-1">
+                  <button id="modoOscuro" type="button" class="btn btn-primary"
+                    onclick="cambiarModo(this)"><i class="fas fa-adjust"></i></button>
+                </div>
+                <div class="col-md-1">
+                  <a id="salir" class="btn btn-primary" href="/"><i class="fas fa-sign-in-alt"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="scrollbar scrollbar-lady-lips">
+              <div id="chat" class="card-body scroll"></div>
+            </div>
+
+            <form id="message-form">
+              <div class="input-group">
+                <input type="text" id="message" class="form-control" />
+                <div class="input-group-append">
+                  <button id="send" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/main.js"></script>
+  <script type="text/javascript">
+    function cambiarModo(boton) {
+      var cuerpoweb = document.body;
+      cuerpoweb.classList.toggle("oscuro");
+      if (document.getElementById("modoOscuro").className == "btn btn-primary") {
+        document.getElementById("modoOscuro").className = "btn btn-dark"
+        document.getElementById("send").className = "btn btn-dark"
+        document.getElementById("usuarios").className = "btn btn-dark"
+        document.getElementById("salir").className = "btn btn-dark"
+        document.getElementById("tituloUsuarios").className = "card-header bg-dark text-black"
+        document.getElementById("tituloChat").className = "card-header bg-dark text-black"
+        document.getElementById("chat").className = "card-body bg-secondary scroll"
+        document.getElementById("bgusers").className = "card-body bg-secondary scroll"
+      } else {
+        document.getElementById("modoOscuro").className = "btn btn-primary"
+        document.getElementById("send").className = "btn btn-primary"
+        document.getElementById("usuarios").className = "btn btn-primary"
+        document.getElementById("salir").className = "btn btn-primary"
+        document.getElementById("tituloUsuarios").className = "card-header bg-primary text-white"
+        document.getElementById("tituloChat").className = "card-header bg-primary text-white"
+        document.getElementById("chat").className = "card-body scroll"
+        document.getElementById("bgusers").className = "card-body scroll"
+      }
+    }
+    var cont = 1;
+    function mostrarUsuarios(boton) {
+      if (cont == 1) {
+        document.getElementById("user-table").style = "display: block;";
+        cont++;
+      }else{
+        document.getElementById("user-table").style = "display: none;";
+        cont = 1;
+      }
+    }
+  </script>
+</body>
+
+</html>
