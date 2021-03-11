@@ -54,8 +54,11 @@
           <div class="card">
             <div id="tituloChat"class="card-header bg-primary text-white">
               <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
                   <h4>Chat</h4>
+                </div>
+                <div class="col-md-1">
+                  <button id="copiar" type="button" class="btn btn-primary" onclick="copiarText()"><i class="fas fa-copy"></i></button>
                 </div>
                 <div class="col-md-1">
                   <a id="usuarios" class="btn btn-primary" onclick="mostrarUsuarios()"><i class="fas fa-users"></i></a>
@@ -105,6 +108,7 @@
         document.getElementById("send").className = "btn btn-dark"
         document.getElementById("usuarios").className = "btn btn-dark"
         document.getElementById("salir").className = "btn btn-dark"
+        document.getElementById("copiar").className = "btn btn-dark"
         document.getElementById("tituloUsuarios").className = "card-header bg-dark text-black"
         document.getElementById("tituloChat").className = "card-header bg-dark text-black"
         document.getElementById("chat").className = "card-body bg-secondary scroll"
@@ -114,6 +118,7 @@
         document.getElementById("send").className = "btn btn-primary"
         document.getElementById("usuarios").className = "btn btn-primary"
         document.getElementById("salir").className = "btn btn-primary"
+        document.getElementById("copiar").className = "btn btn-primary"
         document.getElementById("tituloUsuarios").className = "card-header bg-primary text-white"
         document.getElementById("tituloChat").className = "card-header bg-primary text-white"
         document.getElementById("chat").className = "card-body scroll"
@@ -130,6 +135,18 @@
         cont = 1;
       }
     }
+
+    function copiarText() {
+      let copia = document.getElementById('chat').innerText
+      const texto = document.createElement('textarea');
+      texto.textContent = copia;
+      document.body.append(texto);
+      texto.select();
+      document.execCommand("copy");
+      texto.remove();
+      alert('Texto copiado al portapapeles')
+    }
+
   </script>
 </body>
 
