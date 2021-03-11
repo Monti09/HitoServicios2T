@@ -4,7 +4,7 @@ const app = express();
 const path = require('path');
 
 app.get("/", (req, res) => {
-    res.setHeader("set-cookie", ["setfromserver=1","cookiesegura=Valor seguro; Secure; httponly"])
+    res.setHeader("set-cookie", ["setfromserver=1","cookieMonti=Valor seguro; Secure; httponly"])
     res.sendFile(`${__dirname}`)
 });
 
